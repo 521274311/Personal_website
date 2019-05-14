@@ -24,7 +24,7 @@ SECRET_KEY = 'h-75yc!wbgprm^uxc4nj9lmc9^c6s1gdahmilhj)69g4)9)xl9'
 
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 
