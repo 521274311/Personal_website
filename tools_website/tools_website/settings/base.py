@@ -29,8 +29,7 @@ ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
-    'database_tools',
-
+    'tools',
     'xadmin',
     'crispy_forms',
 

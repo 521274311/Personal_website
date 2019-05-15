@@ -18,7 +18,7 @@ import xadmin
 from django.conf.urls import url
 from django.conf.urls import include
 urlpatterns = [
-    url(r'^$', include('database_tools.urls')),
-    url(r'^database_tools/',include('database_tools.urls')),
+    url(r'^$', include('tools.urls')),
+    url(r'^database_tools/',include('tools.urls')),
     url(r'^admin/', xadmin.site.urls),
 ]
