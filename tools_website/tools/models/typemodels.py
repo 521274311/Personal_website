@@ -12,11 +12,11 @@ class Type(models.Model):
     )
 
     name = models.CharField(max_length=100, verbose_name='类别名')
-    parent = models.ForeignKey('self', verbose_name='上级类别', blank=True, null=True)
+    parent = models.ForeignKey('self', verbose_name='上级类别', blank=True, null=True, on_delete=models.CASCADE)
     status = models.SmallIntegerField(max_length=2, verbose_name='类别状态', choices=TYPE_STATUS_FIELD)
     add_time = models.DateTimeField(verbose_name='添加时间', auto_now_add=True)
     update_time = models.DateTimeField(verbose_name='修改时间', auto_now=True)
-    add_user = models.ForeignKey(User, verbose_name='创建管理员')
+    add_user = models.ForeignKey(User, verbose_name='创建管理员', on_delete=models.CASCADE)
 
     class Meta:
         app_label = 'tools'
