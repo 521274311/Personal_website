@@ -2,10 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Type(models.Model):
+    TYPE_STATUS_WAIT = 0
+    TYPE_STATUS_NORMAL = 1
+    TYPE_STATUS_DEL = 2
     TYPE_STATUS_FIELD = (
-        (0, '未使用'),
-        (1, '已使用'),
-        (2, '已删除'),
+        (TYPE_STATUS_WAIT, '未使用'),
+        (TYPE_STATUS_NORMAL, '已使用'),
+        (TYPE_STATUS_DEL, '已删除'),
     )
 
     name = models.CharField(max_length=100, verbose_name='类别名')
