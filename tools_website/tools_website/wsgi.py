@@ -11,7 +11,7 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-profile = os.environ.get('TOOLS_WEBSITE_PROFILE','develop')
+profile = os.environ.get('TOOLS_WEBSITE_PROFILE','develop_mysql')
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tools_website.settings.%s' % profile)
 
 application = get_wsgi_application()

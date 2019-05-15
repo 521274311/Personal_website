@@ -5,7 +5,7 @@ import sys
 
 
 def main():
-    profile = os.environ.get('TOOLS_WEBSITE_PROFILE','develop')
+    profile = os.environ.get('TOOLS_WEBSITE_PROFILE','develop_mysql')
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tools_website.settings.%s' % profile)
     try:
         from django.core.management import execute_from_command_line
