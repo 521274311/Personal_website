@@ -1,6 +1,6 @@
 /* nav specialized to landing page */
 .logo {
-  background: url('../../tools_website/templates/logo.svg') no-repeat;
+  background: url('logo.svg') no-repeat;
   background-size: contain;
   margin: 1rem 0 0 1rem;
 }
