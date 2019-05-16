@@ -9,7 +9,13 @@ def index(request):
     return render(request,'temp_programs/index.html')
 
 def run_python(request):
+    not_supported = {'open' : 2,'input': 3}
     code = request.POST.get('code')
+    print(code)
+    for key in not_supported.keys():
+        print(key in code)
+        if key in code:
+            return HttpResponse(json.dumps({'code' : not_supported[key],'run_result' : 'Sorry. Not support "'+str(key)+'" function now.'}))
     ans = {}
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     file_path = BASE_DIR + '/user_data/1.py'

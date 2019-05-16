@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Title</title>
+    <title>Dragons Code Online</title>
     <script src="/static/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/src-noconflict/ext-language_tools.js" type="text/javascript"></script>
     <script src="/static/js/jquery-3.4.1.min.js"></script>
@@ -13,14 +13,52 @@
     <link href="/static/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+
+
+
 <!--<div class="container">-->
 <div class="container-fluid">
+
+    <nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="#">Code Online</a>
+	</div>
+	<div>
+		<ul class="nav navbar-nav">
+			<li class="active dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Python</a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'python3.7' %}" id="python3.7">Python 3.7</a> </li>
+                </ul>
+            </li>
+			<!--<li><a href="#">SVN</a></li>-->
+			<!--<li class="dropdown">-->
+				<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+					<!--Java-->
+					<!--<b class="caret"></b>-->
+				<!--</a>-->
+				<!--<ul class="dropdown-menu">-->
+					<!--<li><a href="#">jmeter</a></li>-->
+					<!--<li><a href="#">EJB</a></li>-->
+					<!--<li><a href="#">Jasper Report</a></li>-->
+					<!--<li class="divider"></li>-->
+					<!--<li><a href="#">分离的链接</a></li>-->
+					<!--<li class="divider"></li>-->
+					<!--<li><a href="#">另一个分离的链接</a></li>-->
+				<!--</ul>-->
+			<!--</li>-->
+		</ul>
+	</div>
+	</div>
+</nav>
+
     <input type="hidden" id="lgg" value="python">
     <div style="height:300px;" id="editorDiv"></div>
     <button id="run" class="btn btn-default btn-info">Run</button>
-    <div class="pre-scrollable" id="result">
-
-    </div>
+    <!--<button id="html" class="btn btn-default btn-danger">CONVERT HTML</button>-->
+    <!--<button id="reset" class="btn btn-default btn-primary">Reset</button>-->
+    <pre class="pre-scrollable" id="result"></pre>
 </div>
 
 
@@ -32,6 +70,7 @@
 <script>
     var editor = ace.edit("editorDiv");
     //设置编辑器样式，对应theme-*.js文件
+    // clouds白色
     editor.setTheme("ace/theme/twilight");
     //设置代码语言，对应mode-*.js文件
     editor.session.setMode("ace/mode/python");
@@ -40,13 +79,24 @@
     //设置是否只读
     // editor.setReadOnly(true);
     editor.setFontSize(16);
+    //设置代码折叠
+    editor.getSession().setUseWrapMode(true);
+    //设置高亮
+    editor.setHighlightActiveLine(true);
+    //设置打印边距可见度
+    editor.setShowPrintMargin(false);
 
+    // editor.resize();
     //以下部分是设置输入代码提示的，如果不需要可以不用引用ext-language_tools.js
     ace.require("ace/ext/language_tools");
     editor.setOptions({
         enableBasicAutocompletion: true,
         enableSnippets: true,
         enableLiveAutocompletion: true
+    });
+
+    $('#reset').click(function () {
+
     });
 
     $('#run').click(function () {
@@ -59,6 +109,7 @@
             data : { code : code},
             dataType : 'json',
             success : function (data) {
+                console.log(data)
                 if($('#result').length > 0) $('#result').empty();
                 $('#result').append(data.run_result)
             },

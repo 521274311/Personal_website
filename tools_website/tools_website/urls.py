@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^$', include('tools.urls')),
     url(r'^tools/',include('tools.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^programs/', include('programs.urls')),
+    url(r'^programs/', include('programs.urls'), name='programs'),
 ]
