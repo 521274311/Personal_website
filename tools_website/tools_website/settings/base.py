@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-import xadmin
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -29,8 +28,9 @@ ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
+    'programs',
     'tools',
-    'xadmin',
+    # 'xadmin',
     'crispy_forms',
 
     'django.contrib.admin',
@@ -118,3 +118,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (  # 自定义静态文件位置
     os.path.join(BASE_DIR, "static"),  # 注意不要丢掉这个逗号，因为这是个元祖
 )
+
+USER_DATA_ROOT = os.path.join(BASE_DIR, 'user_data')
+USER_DATA_URL = '/user_data/'
