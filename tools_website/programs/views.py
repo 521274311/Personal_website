@@ -11,9 +11,9 @@ def index(request):
 def run_python(request):
     not_supported = {'open' : 2,'input': 3}
     code = request.POST.get('code')
-    print(code)
+    # print(code)
     for key in not_supported.keys():
-        print(key in code)
+        # print(key in code)
         if key in code:
             return HttpResponse(json.dumps({'code' : not_supported[key],'run_result' : 'Sorry. Not support "'+str(key)+'" function now.'}))
     ans = {}
@@ -30,7 +30,7 @@ def run_python(request):
     run_result = run_result.replace('\n','<br />').replace('\r\n','<br />')
     pattern =  re.compile(r'File "(.*?)"')
     run_result = re.sub(pattern, 'File ""',run_result)
-    print(run_result)
+    # print(run_result)
     ans['run_result'] = run_result
     ans['code'] = code
     return HttpResponse(json.dumps(ans))
