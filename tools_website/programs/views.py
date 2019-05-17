@@ -13,7 +13,7 @@ class RunLanguageView(View):
 
     @classmethod
     def run_python(cls, request):
-        not_supported = {'open': 2, 'input': 3}
+        not_supported = {'open': 2, 'input': 3, 'os.system' : 4, 'os.popen' : 5, 'commands' : 6, 'subprocess' : 7}
         code = request.POST.get('code')
         # print(code)
         for key in not_supported.keys():
