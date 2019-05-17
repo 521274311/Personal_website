@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^$', views.PythonView.as_view(), name='python3.7'),
     # url(r'^$', views.index, name='python3.7'),
     # url(r'^run_python', views.run_python, name='run_python'),
-    url(r'^run_python', views.PythonView.as_view(), name='run_python'),
+    url(r'^run_python', views.RunLanguageView.as_view(), name='run_python'),
 ] + static(settings.USER_DATA_URL,document_root=settings.USER_DATA_ROOT)

@@ -8,8 +8,14 @@ class Link(models.Model):
         (2, '已删除'),
     )
 
+    TYPE_FIELD = (
+        (0, 'URL路由'),
+        (1, '绝对路径'),
+    )
+
     l_language = models.OneToOneField(Language, on_delete=models.CASCADE, verbose_name='编程语言')
     url = models.TextField(verbose_name='链接')
+    type = models.SmallIntegerField(verbose_name='链接类型', choices=TYPE_FIELD, default=0)
     status = models.SmallIntegerField(verbose_name='状态', choices=STATUS_FIELD)
 
     add_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')

@@ -1,1 +1,1 @@
-print("hello worldsd\n dshjadasd")
+print("hello")

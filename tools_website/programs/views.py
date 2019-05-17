@@ -6,13 +6,13 @@ import subprocess
 import re
 from django.views.generic import View
 from .models.languagemodels import Language
+
+
 # Create your views here.
+class RunLanguageView(View):
 
-class PythonView(View):
-    def get(self, request):
-        return render(request,'temp_programs/index.html',{})
-
-    def post(self, request):
+    @classmethod
+    def run_python(cls, request):
         not_supported = {'open': 2, 'input': 3}
         code = request.POST.get('code')
         # print(code)
@@ -27,7 +27,12 @@ class PythonView(View):
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(code)
         try:
-            code, run_result = subprocess.getstatusoutput('python3 ' + file_path)
+            command_run = 'python'
+            if  request.POST.get('version') >= '3':
+                command_run += '3 '
+            else:
+                command_run += '2 '
+            code, run_result = subprocess.getstatusoutput(command_run + file_path)
         except Exception as e:
             code = 1
             run_result = str(e)
@@ -38,7 +43,28 @@ class PythonView(View):
         # print(run_result)
         ans['run_result'] = run_result
         ans['code'] = code
+
         return HttpResponse(json.dumps(ans))
+
+    def post(self, request):
+        if request.POST.get('type') == 'python':
+            return RunLanguageView.run_python(request)
+
+
+class PythonView(View):
+    def get(self, request):
+        languages = Language.objects.all()
+        result = []
+        for language in languages:
+            result.append({'language' : language.name, 'version' : language.version, 'link' : language.link.url})
+
+        result_group = {}
+        for res in result:
+            result_group.setdefault(res['language'],[]).append(res)
+
+        return render(request,'temp_programs/index.html',{'languages' : result_group, 'current_language' : 'python', 'current_version' : '3.7'})
+
+
 
 
 # def index(request):
